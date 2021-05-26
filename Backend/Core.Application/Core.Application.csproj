@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>Backend.Core.Application</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Core.Domain\Core.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+      <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="10.0.2" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
+      <PackageReference Include="Telegram.Bots.Extensions.AspNetCore" Version="2.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Features\Account\Commands\LoginCommandHandler.cs">
+        <DependentUpon>LoginCommand.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Features\Account\Commands\RegisterCommandHandler.cs">
+        <DependentUpon>RegisterCommand.cs</DependentUpon>
+      </Compile>
+      <Compile Update="Features\Account\Commands\InviteCommandHandler.cs">
+        <DependentUpon>InviteCommand.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Features\Correspondence\Commands" />
+    </ItemGroup>
+
+</Project>

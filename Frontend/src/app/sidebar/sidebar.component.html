@@ -1,0 +1,20 @@
+<nb-layout>
+  <nb-sidebar state="compacted">
+    <a [routerLink]="['cases']">
+      <nb-icon  icon="archive"></nb-icon>
+    </a>
+    <br>
+    <a *ngIf="accessChecker.isGranted('view', 'team-members') | async" [routerLink]="['team-members']">
+      <nb-icon icon="people"></nb-icon>
+    </a>
+    <a [routerLink]="['profile']">
+      <nb-icon icon="settings"></nb-icon>
+    </a>
+    <a [routerLink]="['/auth/logout']">
+      <nb-icon icon="log-out"></nb-icon>
+    </a>
+  </nb-sidebar>
+  <nb-layout-column style="padding: 0">
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+</nb-layout>

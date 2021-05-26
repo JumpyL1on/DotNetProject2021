@@ -1,0 +1,18 @@
+<nb-layout>
+  <nb-sidebar>
+    <nb-list>
+      <nb-list-item>
+        <a [routerLink]="['enabled']">Enabled</a>
+      </nb-list-item>
+      <nb-list-item>
+        <a [routerLink]="['pending']">Pending</a>
+      </nb-list-item>
+      <nb-list-item>
+        <a [routerLink]="['disabled']">Disabled</a>
+      </nb-list-item>
+    </nb-list>
+  </nb-sidebar>
+  <nb-layout-column style="padding: 0">
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+</nb-layout>

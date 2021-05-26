@@ -1,0 +1,22 @@
+<nb-layout>
+  <nb-layout-column style="padding: 0">
+    <table [nbTreeGrid]="data" equalColumnsWidth>
+      <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+      <tr [clickToToggle]="false" nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+      <ng-container *ngFor="let column of allColumns" [nbTreeGridColumnDef]="column">
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{column}}</th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
+      </ng-container>
+      <ng-container nbTreeGridColumnDef="assignee">
+        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Assignee</th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">
+          <nb-select *ngFor="let teamMember of teamMembers" placeholder="Unassigned" (selectedChange)="selectedChange()" [(selected)]="value">
+            <nb-option [value]="teamMember.id">
+              <nb-user [name]="teamMember.username"></nb-user>
+            </nb-option>
+          </nb-select>
+        </td>
+      </ng-container>
+    </table>
+  </nb-layout-column>
+</nb-layout>

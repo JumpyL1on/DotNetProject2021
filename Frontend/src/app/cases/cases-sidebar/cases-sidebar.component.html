@@ -1,0 +1,18 @@
+<nb-layout>
+  <nb-sidebar>
+    <nb-list>
+      <nb-list-item>
+        <a [routerLink]="['unassigned']">Unassigned</a>
+      </nb-list-item>
+      <nb-list-item *ngIf="accessChecker.isGranted('view', 'assigned-to-me') | async">
+        <a [routerLink]="['assigned']">Assigned to me</a>
+      </nb-list-item>
+      <nb-list-item>
+        <a [routerLink]="['closed']">Closed</a>
+      </nb-list-item>
+    </nb-list>
+  </nb-sidebar>
+  <nb-layout-column style="padding: 0">
+    <router-outlet></router-outlet>
+  </nb-layout-column>
+</nb-layout>
