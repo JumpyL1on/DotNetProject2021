@@ -11,9 +11,24 @@ import {AuthGuard} from '../auth/auth.guard';
 import {SidebarComponent} from './sidebar/sidebar.component';
 import {AssignedCasesComponent} from './cases/assigned-cases/assigned-cases.component';
 import {CaseDetailsComponent} from './cases/case-details/case-details.component';
+import {
+  NbAuthComponent,
+  NbLoginComponent,
+  NbLogoutComponent,
+  NbRegisterComponent,
+  NbRequestPasswordComponent,
+  NbResetPasswordComponent
+} from '@nebular/auth';
 
 const routes: Routes = [
   {path: '', redirectTo: 'sidebar', pathMatch: 'full'},
+  {path: 'auth', component: NbAuthComponent, children: [
+      {path: 'login', component: NbLoginComponent},
+      {path: 'register', component: NbRegisterComponent},
+      {path: 'logout', component: NbLogoutComponent},
+      {path: 'request-password', component: NbRequestPasswordComponent},
+      {path: 'reset-password', component: NbResetPasswordComponent}
+    ]},
   {path: 'sidebar', component: SidebarComponent, canActivate: [AuthGuard], children: [
       {path: 'cases', component: CasesSidebarComponent, children: [
           {path: 'unassigned', component: UnassignedCasesComponent},

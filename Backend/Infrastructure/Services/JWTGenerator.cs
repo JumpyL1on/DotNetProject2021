@@ -21,10 +21,11 @@ namespace Backend.Infrastructure.Services
 
         public string CreateToken(TeamMember teamMember)
         {
-            var claims = new Claim[]
+            var claims = new []
             {
-                new(ClaimsIdentity.DefaultNameClaimType, teamMember.Email),
-                new("role", teamMember.Role.ToString().ToLower())
+                new Claim(JwtRegisteredClaimNames.Sub, teamMember.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.Email, teamMember.Email),
+                new Claim("role", teamMember.Role.ToString().ToLower())
             };
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JWTSettings.SecurityKey));
             var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);

@@ -36,7 +36,6 @@ namespace Backend.Presentation
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
-                    options.RequireHttpsMetadata = true;
                     options.SaveToken = true;
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
@@ -46,8 +45,7 @@ namespace Backend.Presentation
                         ValidAudience = jwtSettings.ValidAudience,
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecurityKey)),
-                        ValidateLifetime = true,
-                        ClockSkew = TimeSpan.Zero
+                        ValidateLifetime = true
                     };
                 });
             services.AddSignalR();

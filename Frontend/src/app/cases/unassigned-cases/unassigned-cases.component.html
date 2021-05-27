@@ -12,7 +12,7 @@
         <td nbTreeGridCell *nbTreeGridCellDef="let row">
           <nb-select *ngFor="let teamMember of teamMembers" placeholder="Unassigned" (selectedChange)="selectedChange()" [(selected)]="value">
             <nb-option [value]="teamMember.id">
-              <nb-user [name]="teamMember.username"></nb-user>
+              <nb-user [name]="teamMember.userName"></nb-user>
             </nb-option>
           </nb-select>
         </td>

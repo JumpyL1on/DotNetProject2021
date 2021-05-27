@@ -6,10 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./team-members.component.css']
 })
 export class TeamMembersComponent implements OnInit {
-
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
-
 }

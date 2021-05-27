@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Backend.Core.Application.Features.Administration.Commands;
 using Backend.Core.Application.Features.Correspondence.Queries;
 using Backend.Core.Domain.Entities;
+using Backend.Infrastructure.Extensions;
 using Backend.Presentation.Base;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -21,20 +22,20 @@ namespace Backend.Presentation.Controllers
         public async Task<IActionResult> Get([FromQuery] string view)
         {
             return view == "assigned-to-me"
-                ? Ok(await Mediator.Send(new GetAssignedCasesQuery(TeamMemberId)))
-                : Ok(await Mediator.Send(new GetCasesByConditionQuery(view, TeamMemberId)));
+                ? Ok(await Mediator.Send(new GetAssignedCasesQuery(UserManager.GetUserGuid(User))))
+                : Ok(await Mediator.Send(new GetCasesByConditionQuery(view, UserManager.GetUserGuid(User))));
         }
 
         [HttpGet, Route("{id:guid}/messages")]
         public async Task<IActionResult> GetMessages([FromRoute] Guid id)
         {
-            return Ok(await Mediator.Send(new GetCaseMessagesQuery(id, TeamMemberId)));
+            return Ok(await Mediator.Send(new GetCaseMessagesQuery(id, UserManager.GetUserGuid(User))));
         }
 
         [HttpPost, Route("{id:guid}/assign")]
         public async Task<IActionResult> AssignCase([FromRoute] Guid id, [FromBody] AssignCaseCommand command)
         {
-            return Ok(await Mediator.Send(command with {Id = id, TeamMemberId = TeamMemberId}));
+            return Ok(await Mediator.Send(command with {Id = id, TeamMemberId = UserManager.GetUserGuid(User)}));
         }
     }
 }

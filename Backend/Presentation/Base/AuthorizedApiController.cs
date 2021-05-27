@@ -8,16 +8,14 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Presentation.Base
 {
-    [Authorize]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class AuthorizedApiController : BaseApiController
     {
         protected UserManager<TeamMember> UserManager { get; }
-        protected Guid TeamMemberId { get; }
 
         public AuthorizedApiController(IMediator mediator, UserManager<TeamMember> userManager) : base(mediator)
         {
             UserManager = userManager;
-            TeamMemberId = UserManager.GetUserGuid(User);
         }
     }
 }

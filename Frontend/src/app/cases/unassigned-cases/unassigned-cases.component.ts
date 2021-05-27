@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NbDialogService} from '@nebular/theme';
 import {DialogConfirmComponent} from '../../dialog-confirm/dialog-confirm.component';
 import {HttpClient} from '@angular/common/http';
-import {TeamMember} from '../interfaces/team-member';
+import {TeamMember} from '../../interfaces/team-member';
 import {environment} from '../../../environments/environment';
 @Component({
   selector: 'app-unassigned-cases',

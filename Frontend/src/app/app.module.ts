@@ -9,7 +9,6 @@ import {UnassignedCasesComponent} from './cases/unassigned-cases/unassigned-case
 import {EnabledComponent} from './team-members/enabled/enabled.component';
 import {PendingComponent} from './team-members/pending/pending.component';
 import {DisabledComponent} from './team-members/disabled/disabled.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { CasesSidebarComponent } from './cases/cases-sidebar/cases-sidebar.component';
 import { TeamMembersComponent } from './team-members/team-members.component';
 import {
@@ -23,17 +22,26 @@ import {
   NbUserModule,
   NbIconModule,
   NbOptionModule,
-  NbTreeGridModule, NbSelectModule, NbDialogModule
+  NbTreeGridModule, NbSelectModule, NbDialogModule, NbAlertModule, NbInputModule, NbButtonModule, NbCheckboxModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import {AuthModule} from '../auth/auth.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CaseDetailsComponent } from './cases/case-details/case-details.component';
 import { AssignedCasesComponent } from './cases/assigned-cases/assigned-cases.component';
 import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
 import {RoleProvider} from '../auth/role-provider';
 import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
-import {NbAuthJWTInterceptor} from '@nebular/auth';
+import {
+  NB_AUTH_TOKEN_INTERCEPTOR_FILTER,
+  NbAuthJWTInterceptor,
+  NbAuthJWTToken,
+  NbAuthModule,
+  NbPasswordAuthStrategy
+} from '@nebular/auth';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
+import {environment} from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -51,16 +59,63 @@ import {NbAuthJWTInterceptor} from '@nebular/auth';
     DialogConfirmComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     NbThemeModule.forRoot({name: 'default'}),
     NbLayoutModule,
     NbEvaIconsModule,
-    AuthModule,
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    NbAlertModule,
+    NbInputModule,
+    NbButtonModule,
+    NbCheckboxModule,
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+          token: {
+            class: NbAuthJWTToken,
+            key: 'token'
+          },
+          baseEndpoint: environment.api,
+          login: {
+            endpoint: 'auth/sign-in',
+            method: 'post',
+            redirect: {
+              success: 'sidebar',
+              failure: null
+            }
+          },
+          register: {
+            endpoint: 'auth/sign-up',
+            method: 'post',
+            redirect: {
+              success: 'auth/login',
+              failure: null
+            }
+          },
+          logout: {
+            endpoint: 'auth/sign-out',
+            method: 'post'
+          },
+          requestPass: {
+            endpoint: 'auth/request-pass',
+            method: 'post'
+          },
+          resetPass: {
+            endpoint: 'auth/reset-pass',
+            method: 'post'
+          }
+        })
+      ],
+      forms: {}
+    }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbCardModule,
@@ -86,7 +141,8 @@ import {NbAuthJWTInterceptor} from '@nebular/auth';
   ],
   providers: [
     {provide: NbRoleProvider, useClass: RoleProvider},
-    {provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true},
+    {provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: (req) => false}
   ],
   bootstrap: [AppComponent]
 })

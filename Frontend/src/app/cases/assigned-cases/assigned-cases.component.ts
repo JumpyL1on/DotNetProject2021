@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {AssignedCase} from '../interfaces/assigned-case';
+import {AssignedCase} from '../../interfaces/assigned-case';
 import {environment} from '../../../environments/environment';
 
 @Component({
