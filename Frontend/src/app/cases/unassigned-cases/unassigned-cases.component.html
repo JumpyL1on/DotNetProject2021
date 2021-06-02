@@ -1,22 +1,22 @@
 <nb-layout>
   <nb-layout-column style="padding: 0">
-    <table [nbTreeGrid]="data" equalColumnsWidth>
-      <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
-      <tr [clickToToggle]="false" nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
-      <ng-container *ngFor="let column of allColumns" [nbTreeGridColumnDef]="column">
-        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>{{column}}</th>
-        <td nbTreeGridCell *nbTreeGridCellDef="let row">{{row.data[column]}}</td>
-      </ng-container>
-      <ng-container nbTreeGridColumnDef="assignee">
-        <th nbTreeGridHeaderCell *nbTreeGridHeaderCellDef>Assignee</th>
-        <td nbTreeGridCell *nbTreeGridCellDef="let row">
-          <nb-select *ngFor="let teamMember of teamMembers" placeholder="Unassigned" (selectedChange)="selectedChange()" [(selected)]="value">
-            <nb-option [value]="teamMember.id">
-              <nb-user [name]="teamMember.userName"></nb-user>
+    <table id="cases">
+      <tr>
+        <th *ngFor="let column of headers">
+          {{column}}
+        </th>
+      </tr>
+      <tr *ngFor="let case of rows">
+        <td>{{case.status}}</td>
+        <td>
+          <nb-select placeholder="Unassigned" (selectedChange)="selectedChange(case.id)" [(selected)]="value">
+            <nb-option *ngFor="let teamMember of teamMembers" [value]="teamMember.id">
+              <nb-user [name]="teamMember.fullName"></nb-user>
             </nb-option>
           </nb-select>
         </td>
-      </ng-container>
+        <td>{{case.updatedAt}}</td>
+      </tr>
     </table>
   </nb-layout-column>
 </nb-layout>

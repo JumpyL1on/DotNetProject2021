@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Backend.Core.Application.Features.Auth.Base;
@@ -19,7 +20,8 @@ namespace Backend.Core.Application.Features.Auth.Handlers
 
         public async Task<string> Handle(SignUpCommand request, CancellationToken cancellationToken)
         {
-            var user = new TeamMember(request.Fullname) {Role = Role.Manager, Email = request.Email};
+            var user = new TeamMember(request.FullName)
+                {Role = Role.Manager, Email = request.Email, AddedAt = DateTime.Now};
             var result = await UserManager.CreateAsync(user, request.Password);
             return result.Succeeded ? JWTGenerator.CreateToken(user) : null;
         }

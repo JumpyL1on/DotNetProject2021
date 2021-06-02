@@ -1,11 +1,13 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{C156A96E-F9CF-42CD-885A-D94C6F5D8535}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{83A5667F-BD1E-4BCE-B960-6603632B9ECF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.WebAPI", "Presentation.WebAPI\Presentation.WebAPI.csproj", "{83A5667F-BD1E-4BCE-B960-6603632B9ECF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Domain", "Core.Domain\Core.Domain.csproj", "{18453083-DD1A-4D5C-9D14-ACCCC0636E4F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Application", "Core.Application\Core.Application.csproj", "{4AA53761-6679-4408-B2CC-93A77E1D5FEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.TelegramBot", "Presentation.TelegramBot\Presentation.TelegramBot.csproj", "{2D14C665-8F05-4F1F-95A4-14085ACB5D62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{4AA53761-6679-4408-B2CC-93A77E1D5FEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4AA53761-6679-4408-B2CC-93A77E1D5FEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4AA53761-6679-4408-B2CC-93A77E1D5FEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D14C665-8F05-4F1F-95A4-14085ACB5D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D14C665-8F05-4F1F-95A4-14085ACB5D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D14C665-8F05-4F1F-95A4-14085ACB5D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D14C665-8F05-4F1F-95A4-14085ACB5D62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 	EndGlobalSection

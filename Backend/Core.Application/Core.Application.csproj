@@ -29,8 +29,4 @@
       </Compile>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Features\Correspondence\Commands" />
-    </ItemGroup>
-
 </Project>

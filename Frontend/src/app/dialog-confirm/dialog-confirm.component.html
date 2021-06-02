@@ -1,7 +1,8 @@
 <nb-card>
-  <nb-card-header>Template Dialog</nb-card-header>
-  <nb-card-body>data</nb-card-body>
+  <nb-card-header>Dialog Confirm</nb-card-header>
+  <nb-card-body>Are you sure?</nb-card-body>
   <nb-card-footer>
-    <button nbButton (click)="close()">Close Dialog</button>
+    <button nbButton status="success" (click)="agree()">Agree</button>
+    <button nbButton status="danger" (click)="cancel()">Cancel</button>
   </nb-card-footer>
 </nb-card>

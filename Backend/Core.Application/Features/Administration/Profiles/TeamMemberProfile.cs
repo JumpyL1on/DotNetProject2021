@@ -10,7 +10,7 @@ namespace Backend.Core.Application.Features.Administration.Profiles
         {
             CreateMap<TeamMember, TeamMemberDTO>()
                 .ForMember(dto => dto.Id, expression => expression.MapFrom(member => member.Id))
-                .ForMember(dto => dto.UserName, expression => expression.MapFrom(member => member.UserName));
+                .ForMember(dto => dto.FullName, expression => expression.MapFrom(member => member.UserName));
         }
     }
 }

@@ -16,15 +16,17 @@ namespace Backend.Core.Application.Features.Administration.Validators
                     var @case = await dbContext
                         .Set<Case>()
                         .FindAsync(new object[] {guid}, token);
+                    @case.UnAssign();
+                    await dbContext.SaveChangesAsync(token);
                     return @case != null && @case.TeamMemberId == null;
                 })
                 .DependentRules(() =>
                 {
+                    var teamMembers = dbContext.Set<TeamMember>();
                     RuleFor(command => command.TeamMemberId)
                         .MustAsync(async (guid, token) =>
                         {
-                            var director = await dbContext
-                                .Set<TeamMember>()
+                            var director = await teamMembers
                                 .FindAsync(new object[] {guid}, token);
                             return director != null && director.Role == Role.Director;
                         })
@@ -33,8 +35,7 @@ namespace Backend.Core.Application.Features.Administration.Validators
                             RuleFor(command => command.AssigneeId)
                                 .MustAsync(async (guid, token) =>
                                 {
-                                    var manager = await dbContext
-                                        .Set<TeamMember>()
+                                    var manager = await teamMembers
                                         .FindAsync(new object[] {guid}, token);
                                     return manager != null && manager.Role == Role.Manager;
                                 });

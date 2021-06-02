@@ -13,12 +13,16 @@ namespace Backend.Core.Domain.Entities
         public virtual Client Client { get; protected set; }
         [Required] public int ClientId { get; protected set; }
         [Required] public Status Status { get; protected set; }
+        public Guid? LastMessageId { get; protected set; }
+        [Required] public DateTime UpdatedAt { get; protected set; }
         public ICollection<Message> Messages { get; protected set; }
 
         public Case(int clientId)
         {
             ClientId = clientId;
             Status = Status.New;
+            LastMessageId = null;
+            UpdatedAt = DateTime.Now;
         }
         
         protected Case()
@@ -29,16 +33,25 @@ namespace Backend.Core.Domain.Entities
         {
             TeamMemberId = teamMemberId;
             Status = Status.Open;
+            UpdatedAt = DateTime.Now;
+        }
+
+        public void Foo(Guid lastMessageId)
+        {
+            LastMessageId = lastMessageId;
+            UpdatedAt = DateTime.Now;
         }
 
         public void UnAssign()
         {
             TeamMemberId = null;
+            UpdatedAt = DateTime.Now;
         }
 
         public void Close()
         {
             Status = Status.Closed;
+            UpdatedAt = DateTime.Now;
         }
     }
 }

@@ -11,11 +11,13 @@ namespace Backend.Core.Application.Extensions
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
+
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddBotClient(string.Empty);
+            services.AddSignalR();
+            services.AddBotClient("1620195368:AAFHJ99UTdJ5W301yozMozAZXbJdjomwVpE");
             return services;
         }
     }

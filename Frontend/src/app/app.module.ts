@@ -9,8 +9,8 @@ import {UnassignedCasesComponent} from './cases/unassigned-cases/unassigned-case
 import {EnabledComponent} from './team-members/enabled/enabled.component';
 import {PendingComponent} from './team-members/pending/pending.component';
 import {DisabledComponent} from './team-members/disabled/disabled.component';
-import { CasesSidebarComponent } from './cases/cases-sidebar/cases-sidebar.component';
-import { TeamMembersComponent } from './team-members/team-members.component';
+import {CasesSidebarComponent} from './cases/cases-sidebar/cases-sidebar.component';
+import {TeamMembersComponent} from './team-members/team-members.component';
 import {
   NbThemeModule,
   NbLayoutModule,
@@ -22,26 +22,21 @@ import {
   NbUserModule,
   NbIconModule,
   NbOptionModule,
-  NbTreeGridModule, NbSelectModule, NbDialogModule, NbAlertModule, NbInputModule, NbButtonModule, NbCheckboxModule
+  NbTreeGridModule,
+  NbSelectModule,
+  NbDialogModule, NbButtonModule,
 } from '@nebular/theme';
-import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { CaseDetailsComponent } from './cases/case-details/case-details.component';
-import { AssignedCasesComponent } from './cases/assigned-cases/assigned-cases.component';
+import {NbEvaIconsModule} from '@nebular/eva-icons';
+import {SidebarComponent} from './sidebar/sidebar.component';
+import {CaseDetailsComponent} from './cases/case-details/case-details.component';
+import {AssignedToMeCasesComponent} from './cases/assigned-to-me-cases/assigned-to-me-cases.component';
 import {NbRoleProvider, NbSecurityModule} from '@nebular/security';
 import {RoleProvider} from '../auth/role-provider';
-import { DialogConfirmComponent } from './dialog-confirm/dialog-confirm.component';
-import {
-  NB_AUTH_TOKEN_INTERCEPTOR_FILTER,
-  NbAuthJWTInterceptor,
-  NbAuthJWTToken,
-  NbAuthModule,
-  NbPasswordAuthStrategy
-} from '@nebular/auth';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {DialogConfirmComponent} from './dialog-confirm/dialog-confirm.component';
+import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
-import {environment} from '../environments/environment';
+import {AuthModule} from '../auth/auth.module';
+import { OpenCasesComponent } from './cases/open-cases/open-cases.component';
 
 @NgModule({
   declarations: [
@@ -55,10 +50,12 @@ import {environment} from '../environments/environment';
     TeamMembersComponent,
     SidebarComponent,
     CaseDetailsComponent,
-    AssignedCasesComponent,
-    DialogConfirmComponent
+    AssignedToMeCasesComponent,
+    DialogConfirmComponent,
+    OpenCasesComponent
   ],
   imports: [
+    CommonModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
@@ -68,54 +65,6 @@ import {environment} from '../environments/environment';
     NbThemeModule.forRoot({name: 'default'}),
     NbLayoutModule,
     NbEvaIconsModule,
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    NbAlertModule,
-    NbInputModule,
-    NbButtonModule,
-    NbCheckboxModule,
-    NbAuthModule.forRoot({
-      strategies: [
-        NbPasswordAuthStrategy.setup({
-          name: 'email',
-          token: {
-            class: NbAuthJWTToken,
-            key: 'token'
-          },
-          baseEndpoint: environment.api,
-          login: {
-            endpoint: 'auth/sign-in',
-            method: 'post',
-            redirect: {
-              success: 'sidebar',
-              failure: null
-            }
-          },
-          register: {
-            endpoint: 'auth/sign-up',
-            method: 'post',
-            redirect: {
-              success: 'auth/login',
-              failure: null
-            }
-          },
-          logout: {
-            endpoint: 'auth/sign-out',
-            method: 'post'
-          },
-          requestPass: {
-            endpoint: 'auth/request-pass',
-            method: 'post'
-          },
-          resetPass: {
-            endpoint: 'auth/reset-pass',
-            method: 'post'
-          }
-        })
-      ],
-      forms: {}
-    }),
     NbSidebarModule.forRoot(),
     NbMenuModule.forRoot(),
     NbCardModule,
@@ -133,16 +82,16 @@ import {environment} from '../environments/environment';
           view: 'assigned-to-me'
         },
         director: {
-          view: ['team-members']
+          view: '*' //['team-members', 'unassigned', 'open', 'closed']
         }
       }
     }),
-    NbDialogModule.forRoot()
+    NbDialogModule.forRoot(),
+    AuthModule,
+    NbButtonModule
   ],
   providers: [
-    {provide: NbRoleProvider, useClass: RoleProvider},
-    {provide: HTTP_INTERCEPTORS, useClass: NbAuthJWTInterceptor, multi: true},
-    {provide: NB_AUTH_TOKEN_INTERCEPTOR_FILTER, useValue: (req) => false}
+    {provide: NbRoleProvider, useClass: RoleProvider}
   ],
   bootstrap: [AppComponent]
 })

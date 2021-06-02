@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {NbDialogRef} from '@nebular/theme';
 
 @Component({
   selector: 'app-dialog-confirm',
@@ -6,12 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dialog-confirm.component.css']
 })
 export class DialogConfirmComponent implements OnInit {
-  constructor() { }
+  constructor(private dialogRef: NbDialogRef<DialogConfirmComponent>) {
+  }
 
   ngOnInit(): void {
   }
 
-  close() : void {
-    
+  agree() {
+    this.dialogRef.close(true);
+  }
+
+  cancel() {
+    this.dialogRef.close(false);
   }
 }

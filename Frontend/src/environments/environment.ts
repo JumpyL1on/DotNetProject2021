@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  api: 'https://localhost:44322/api/'
+  webAPI: 'https://localhost:44322/api/',
+  telegramBot: 'https://localhost:44388/api/'
 };

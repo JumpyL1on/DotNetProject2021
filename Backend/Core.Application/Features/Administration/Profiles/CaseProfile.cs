@@ -10,7 +10,8 @@ namespace Backend.Core.Application.Features.Administration.Profiles
         {
             CreateMap<Case, CaseDTO>()
                 .ForMember(dto => dto.Id, expression => expression.MapFrom(@case => @case.Id))
-                .ForMember(dto => dto.Status, expression => expression.MapFrom(@case => @case.Status.ToString()));
+                .ForMember(dto => dto.Status,
+                    expression => expression.MapFrom(@case => @case.Status.ToString().ToLower()));
         }
     }
 }

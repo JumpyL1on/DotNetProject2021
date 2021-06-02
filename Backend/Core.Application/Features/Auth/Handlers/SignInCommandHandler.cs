@@ -9,22 +9,17 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Core.Application.Features.Auth.Handlers
 {
-    internal class SignInCommandHandler : BaseAuthHandler, IRequestHandler<SigInCommand, string>
+    internal class SignInCommandHandler : BaseAuthHandler, IRequestHandler<SignInCommand, string>
     {
-        private SignInManager<TeamMember> SignInManager { get; }
-
-        public SignInCommandHandler(UserManager<TeamMember> userManager, IJWTGenerator jwtGenerator,
-            SignInManager<TeamMember> signInManager) : base(userManager, jwtGenerator)
+        public SignInCommandHandler(UserManager<TeamMember> userManager, IJWTGenerator jwtGenerator) : base(userManager,
+            jwtGenerator)
         {
-            SignInManager = signInManager;
         }
 
-        public async Task<string> Handle(SigInCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(SignInCommand request, CancellationToken cancellationToken)
         {
-            var (email, password) = request;
-            var user = await UserManager.FindByEmailAsync(email);
-            var result = await SignInManager.CheckPasswordSignInAsync(user, password, false);
-            return result.Succeeded ? JWTGenerator.CreateToken(user) : null;
+            var teamMember = await UserManager.FindByEmailAsync(request.Email);
+            return JWTGenerator.CreateToken(teamMember);
         }
     }
 }

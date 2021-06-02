@@ -9,7 +9,7 @@ import {CasesSidebarComponent} from './cases/cases-sidebar/cases-sidebar.compone
 import {TeamMembersComponent} from './team-members/team-members.component';
 import {AuthGuard} from '../auth/auth.guard';
 import {SidebarComponent} from './sidebar/sidebar.component';
-import {AssignedCasesComponent} from './cases/assigned-cases/assigned-cases.component';
+import {AssignedToMeCasesComponent} from './cases/assigned-to-me-cases/assigned-to-me-cases.component';
 import {CaseDetailsComponent} from './cases/case-details/case-details.component';
 import {
   NbAuthComponent,
@@ -32,8 +32,8 @@ const routes: Routes = [
   {path: 'sidebar', component: SidebarComponent, canActivate: [AuthGuard], children: [
       {path: 'cases', component: CasesSidebarComponent, children: [
           {path: 'unassigned', component: UnassignedCasesComponent},
-          {path: 'assigned', component: AssignedCasesComponent, children: [
-              {path: 'details', component: CaseDetailsComponent}
+          {path: 'assigned-to-me', component: AssignedToMeCasesComponent, children: [
+              {path: ':id', component: CaseDetailsComponent}
             ]},
           {path: 'closed', component: ClosedCasesComponent}
         ]},

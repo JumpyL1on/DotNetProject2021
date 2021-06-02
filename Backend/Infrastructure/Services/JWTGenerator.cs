@@ -12,31 +12,30 @@ namespace Backend.Infrastructure.Services
 {
     public class JWTGenerator : IJWTGenerator
     {
-        private JWTSettings JWTSettings { get; }
+        private AuthOptions AuthOptions { get; }
 
         public JWTGenerator(IConfiguration configuration)
         {
-            JWTSettings = configuration.GetSection("JWTSettings").Get<JWTSettings>();
+            AuthOptions = configuration.GetSection("AuthOptions").Get<AuthOptions>();
         }
 
         public string CreateToken(TeamMember teamMember)
         {
-            var claims = new []
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, teamMember.Id.ToString()),
-                new Claim(JwtRegisteredClaimNames.Email, teamMember.Email),
-                new Claim("role", teamMember.Role.ToString().ToLower())
-            };
-            var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JWTSettings.SecurityKey));
-            var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
-            var tokenOptions = new JwtSecurityToken(
-                JWTSettings.ValidIssuer,
-                JWTSettings.ValidAudience,
-                claims,
-                DateTime.Now,
-                DateTime.Now.AddMinutes(JWTSettings.ExpiryInMinutes),
-                signingCredentials);
-            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+            return new JwtSecurityTokenHandler()
+                .WriteToken(new JwtSecurityToken(
+                    AuthOptions.Issuer,
+                    AuthOptions.Audience,
+                    new[]
+                    {
+                        new Claim(JwtRegisteredClaimNames.Sub, teamMember.Id.ToString()),
+                        new Claim(ClaimTypes.NameIdentifier, teamMember.Id.ToString()),
+                        new Claim(JwtRegisteredClaimNames.UniqueName, teamMember.UserName),
+                        new Claim(JwtRegisteredClaimNames.Email, teamMember.Email),
+                        new Claim("role", teamMember.Role.ToString().ToLower())
+                    },
+                    DateTime.Now,
+                    DateTime.Now.AddMinutes(AuthOptions.Lifetime),
+                    new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AuthOptions.Key)), "HS256")));
         }
     }
 }

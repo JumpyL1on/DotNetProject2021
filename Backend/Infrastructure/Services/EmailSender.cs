@@ -7,7 +7,6 @@ namespace Backend.Infrastructure.Services
     {
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            
         }
     }
 }

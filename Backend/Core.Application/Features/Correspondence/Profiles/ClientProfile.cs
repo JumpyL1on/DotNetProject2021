@@ -10,8 +10,8 @@ namespace Backend.Core.Application.Features.Correspondence.Profiles
         {
             CreateMap<Client, ClientDTO>()
                 .ForMember(dto => dto.Id, expression => expression.MapFrom(client => client.Id))
-                .ForMember(dto => dto.FirstName, expression => expression.MapFrom(client => client.FirstName))
-                .ForMember(dto => dto.LastName, expression => expression.MapFrom(client => client.LastName));
+                .ForMember(dto => dto.FullName,
+                    expression => expression.MapFrom(client => $"{client.FirstName} {client.LastName}"));
         }
     }
 }

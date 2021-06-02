@@ -5,7 +5,7 @@
         <a [routerLink]="['unassigned']">Unassigned</a>
       </nb-list-item>
       <nb-list-item *ngIf="accessChecker.isGranted('view', 'assigned-to-me') | async">
-        <a [routerLink]="['assigned']">Assigned to me</a>
+        <a [routerLink]="['assigned-to-me']">Assigned to me</a>
       </nb-list-item>
       <nb-list-item>
         <a [routerLink]="['closed']">Closed</a>

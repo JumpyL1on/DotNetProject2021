@@ -1,0 +1,13 @@
+﻿{
+  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "Presentation.TelegramBot": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "applicationUrl": "https://localhost:44388",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

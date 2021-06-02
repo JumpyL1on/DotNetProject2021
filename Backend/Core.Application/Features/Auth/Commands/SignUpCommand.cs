@@ -6,7 +6,7 @@ namespace Backend.Core.Application.Features.Auth.Commands
     {
         public string Email { get; init; }
         public string Password { get; init; }
-        public string Fullname { get; init; }
+        public string FullName { get; init; }
         public string ConfirmPassword { get; init; }
     }
 }

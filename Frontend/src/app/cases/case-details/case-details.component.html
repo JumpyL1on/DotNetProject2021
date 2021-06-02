@@ -1,14 +1,12 @@
-<nb-chat title="Jake" status="warning">
-  <nb-chat-message *ngFor="let message of messages"
-                   [type]="message.type"
-                   [message]="message.text"
-                   [reply]="message.reply"
-                   [sender]="message.user.name"
-                   [date]="message.date"
-                   [quote]="message.quote"
-                   [latitude]="message.latitude"
-                   [longitude]="message.longitude"
-                   [avatar]="message.user.avatar"></nb-chat-message>
-  <nb-chat-form (send)="sendMessage($event, 'Jake', 'http://www.reactiongifs.com/r/wnd1.gif', true)">
-  </nb-chat-form>
-</nb-chat>
+<nb-layout>
+  <nb-layout-column style="padding: 0">
+    <nb-chat [title]="assignedCase.client.fullName">
+      <nb-chat-message dateFormat="longTime" *ngFor="let message of messages"
+                       [type]="message.type"
+                       [message]="message.text"
+                       [reply]="message.reply"
+                       [date]="message.createdAt"></nb-chat-message>
+      <nb-chat-form (send)="sendMessage($event)"></nb-chat-form>
+    </nb-chat>
+  </nb-layout-column>
+</nb-layout>
