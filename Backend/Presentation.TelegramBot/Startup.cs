@@ -1,6 +1,5 @@
 using System.Text;
 using System.Threading.Tasks;
-using Backend.Core.Application;
 using Backend.Core.Application.Extensions;
 using Backend.Core.Application.Interfaces;
 using Backend.Core.Domain.ValueObjects;
@@ -28,7 +27,7 @@ namespace Presentation.TelegramBot
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApplication();
+            services.AddApplication(Configuration);
             services.AddInfrastructure(Configuration);
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

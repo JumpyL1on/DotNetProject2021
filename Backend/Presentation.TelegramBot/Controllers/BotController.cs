@@ -18,7 +18,6 @@ namespace Presentation.TelegramBot.Controllers
         }
 
         [HttpPost]
-        [Route("1620195368:AAFHJ99UTdJ5W301yozMozAZXbJdjomwVpE")]
         public async Task Post([FromBody] MessageUpdate messageUpdate)
         {
             var message = (TextMessage) messageUpdate.Data;

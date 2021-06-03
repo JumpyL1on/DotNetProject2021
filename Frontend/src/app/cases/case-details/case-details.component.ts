@@ -51,7 +51,10 @@ export class CaseDetailsComponent implements OnInit {
         .subscribe(response => this.assignedCase = response);
       this.http
         .get<Message[]>(environment.webAPI + `cases/${params.id}/messages`)
-        .subscribe(response => this.messages = response);
+        .subscribe(response => {
+          this.messages = response;
+          this.messages.push();
+        });
     });
   }
 

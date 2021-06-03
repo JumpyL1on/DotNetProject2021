@@ -1,12 +1,10 @@
-<nb-layout>
-  <nb-layout-column style="padding: 0">
-    <nb-chat [title]="assignedCase.client.fullName">
-      <nb-chat-message dateFormat="longTime" *ngFor="let message of messages"
-                       [type]="message.type"
-                       [message]="message.text"
-                       [reply]="message.reply"
-                       [date]="message.createdAt"></nb-chat-message>
-      <nb-chat-form (send)="sendMessage($event)"></nb-chat-form>
-    </nb-chat>
-  </nb-layout-column>
-</nb-layout>
+<nb-chat [title]="assignedCase.client.fullName" style="height: 100vh">
+  <nb-chat-message dateFormat="medium"
+                   *ngFor="let message of messages"
+                   [type]="message.type"
+                   [message]="message.text"
+                   [reply]="message.reply"
+                   [date]="message.createdAt">
+  </nb-chat-message>
+  <nb-chat-form (send)="sendMessage($event)"></nb-chat-form>
+</nb-chat>

@@ -14,7 +14,7 @@ namespace Presentation.TelegramBot
         {
             var host = CreateHostBuilder(args).Build();
             var bot = host.Services.GetRequiredService<IBotClient>();
-            const string uri = "https://94dac04fe345.ngrok.io/api/bot/1620195368:AAFHJ99UTdJ5W301yozMozAZXbJdjomwVpE";
+            const string uri = "https://60e44c3efe52.ngrok.io/api/bot";
             var request = new SetWebhook(new Uri(uri));
             var response = await bot.HandleAsync(request);
             if (response.Ok)

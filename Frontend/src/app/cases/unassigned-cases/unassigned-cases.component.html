@@ -1,22 +1,18 @@
-<nb-layout>
-  <nb-layout-column style="padding: 0">
-    <table id="cases">
-      <tr>
-        <th *ngFor="let column of headers">
-          {{column}}
-        </th>
-      </tr>
-      <tr *ngFor="let case of rows">
-        <td>{{case.status}}</td>
-        <td>
-          <nb-select placeholder="Unassigned" (selectedChange)="selectedChange(case.id)" [(selected)]="value">
-            <nb-option *ngFor="let teamMember of teamMembers" [value]="teamMember.id">
-              <nb-user [name]="teamMember.fullName"></nb-user>
-            </nb-option>
-          </nb-select>
-        </td>
-        <td>{{case.updatedAt}}</td>
-      </tr>
-    </table>
-  </nb-layout-column>
-</nb-layout>
+<table id="cases">
+  <tr>
+    <th *ngFor="let column of headers">
+      {{column}}
+    </th>
+  </tr>
+  <tr *ngFor="let case of rows">
+    <td>{{case.status}}</td>
+    <td>
+      <nb-select placeholder="Unassigned" (selectedChange)="selectedChange(case.id)" [(selected)]="value">
+        <nb-option *ngFor="let teamMember of teamMembers" [value]="teamMember.id">
+          <nb-user [name]="teamMember.fullName"></nb-user>
+        </nb-option>
+      </nb-select>
+    </td>
+    <td>{{case.updatedAt}}</td>
+  </tr>
+</table>

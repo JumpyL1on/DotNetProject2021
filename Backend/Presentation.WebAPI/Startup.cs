@@ -28,7 +28,7 @@ namespace Backend.Presentation.WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddApplication();
+            services.AddApplication(Configuration);
             services.AddInfrastructure(Configuration);
             services
                 .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
