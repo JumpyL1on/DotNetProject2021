@@ -6,5 +6,9 @@ namespace Backend.Core.Application.Features.Administration.DTOs
     {
         public Guid Id { get; init; }
         public string FullName { get; init; }
+        public string Email { get; init; }
+        public string Role { get; init; }
+        public DateTime AddedAt { get; init; }
+        public DateTime DeletedAt { get; init; }
     }
 }

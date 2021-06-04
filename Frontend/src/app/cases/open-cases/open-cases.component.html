@@ -1,1 +1,20 @@
-<p>open-cases works!</p>
+<table id="cases">
+  <tr>
+    <th *ngFor="let column of headers">
+      {{column}}
+    </th>
+  </tr>
+  <tr *ngFor="let case of rows">
+    <td>{{case.status}}</td>
+    <td>
+      <nb-user size="medium" [name]="case.teamMember.fullName"></nb-user>
+    </td>
+    <td>{{case.updatedAt | date: 'medium'}}</td>
+    <td>
+      <nb-actions size="medium">
+        <nb-action (click)="unassign(case.id)">Unassign</nb-action>
+        <nb-action>Close</nb-action>
+      </nb-actions>
+    </td>
+  </tr>
+</table>

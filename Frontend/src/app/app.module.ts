@@ -6,11 +6,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppComponent} from './app.component';
 import {ClosedCasesComponent} from './cases/closed-cases/closed-cases.component';
 import {UnassignedCasesComponent} from './cases/unassigned-cases/unassigned-cases.component';
-import {EnabledComponent} from './team-members/enabled/enabled.component';
-import {PendingComponent} from './team-members/pending/pending.component';
-import {DisabledComponent} from './team-members/disabled/disabled.component';
+import {EnabledTeamMembersComponent} from './team-members/enabled-team-members/enabled-team-members.component';
+import {DeletedTeamMembersComponent} from './team-members/deleted-team-members/deleted-team-members.component';
 import {CasesSidebarComponent} from './cases/cases-sidebar/cases-sidebar.component';
-import {TeamMembersComponent} from './team-members/team-members.component';
+import {TeamMembersSidebarComponent} from './team-members/team-members-sidebar/team-members-sidebar.component';
 import {
   NbThemeModule,
   NbLayoutModule,
@@ -24,7 +23,7 @@ import {
   NbOptionModule,
   NbTreeGridModule,
   NbSelectModule,
-  NbDialogModule, NbButtonModule,
+  NbDialogModule, NbButtonModule, NbActionsModule, NbTagModule,
 } from '@nebular/theme';
 import {NbEvaIconsModule} from '@nebular/eva-icons';
 import {SidebarComponent} from './sidebar/sidebar.component';
@@ -43,11 +42,10 @@ import { OpenCasesComponent } from './cases/open-cases/open-cases.component';
     AppComponent,
     ClosedCasesComponent,
     UnassignedCasesComponent,
-    EnabledComponent,
-    PendingComponent,
-    DisabledComponent,
+    EnabledTeamMembersComponent,
+    DeletedTeamMembersComponent,
     CasesSidebarComponent,
-    TeamMembersComponent,
+    TeamMembersSidebarComponent,
     SidebarComponent,
     CaseDetailsComponent,
     AssignedToMeCasesComponent,
@@ -82,13 +80,15 @@ import { OpenCasesComponent } from './cases/open-cases/open-cases.component';
           view: 'assigned-to-me'
         },
         director: {
-          view: '*' //['team-members', 'unassigned', 'open', 'closed']
+          view: ['team-members', 'unassigned', 'open', 'closed']
         }
       }
     }),
     NbDialogModule.forRoot(),
     AuthModule,
-    NbButtonModule
+    NbButtonModule,
+    NbActionsModule,
+    NbTagModule
   ],
   providers: [
     {provide: NbRoleProvider, useClass: RoleProvider}

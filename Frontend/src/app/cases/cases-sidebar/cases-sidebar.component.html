@@ -1,13 +1,16 @@
 <nb-layout>
   <nb-sidebar>
     <nb-list>
-      <nb-list-item>
+      <nb-list-item *ngIf="accessChecker.isGranted('view', 'unassigned') | async">
         <a [routerLink]="['unassigned']">Unassigned</a>
       </nb-list-item>
       <nb-list-item *ngIf="accessChecker.isGranted('view', 'assigned-to-me') | async">
         <a [routerLink]="['assigned-to-me']">Assigned to me</a>
       </nb-list-item>
-      <nb-list-item>
+      <nb-list-item *ngIf="accessChecker.isGranted('view', 'open') | async">
+        <a [routerLink]="['open']">Open</a>
+      </nb-list-item>
+      <nb-list-item *ngIf="accessChecker.isGranted('view', 'closed') | async">
         <a [routerLink]="['closed']">Closed</a>
       </nb-list-item>
     </nb-list>

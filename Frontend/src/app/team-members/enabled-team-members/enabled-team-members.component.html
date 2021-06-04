@@ -1,0 +1,22 @@
+<table *ngIf="rows.length > 0" id="team-members">
+  <tr>
+    <th *ngFor="let column of headers">
+      {{column}}
+    </th>
+  </tr>
+  <tr *ngFor="let teamMember of rows">
+    <td>
+      <nb-user [name]="teamMember.fullName" [title]="teamMember.email"></nb-user>
+    </td>
+    <td>
+      <nb-user name="Default"></nb-user>
+    </td>
+    <td>{{teamMember.addedAt | date: 'medium'}}</td>
+    <td>
+      <nb-tag appearance="filled" [text]="teamMember.role"></nb-tag>
+    </td>
+    <td>
+      <button nbButton (click)="delete(teamMember.id)">Delete</button>
+    </td>
+  </tr>
+</table>

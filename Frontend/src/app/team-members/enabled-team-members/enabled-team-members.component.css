@@ -1,14 +1,14 @@
-#cases {
+#team-members {
   border-collapse: collapse;
   width: 100%;
 }
 
-#cases td, #cases th {
+#team-members td, #team-members th {
   border: 1px solid;
   padding: 8px;
 }
 
-#cases th {
+#team-members th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;

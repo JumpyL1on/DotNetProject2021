@@ -50,5 +50,12 @@ namespace Backend.Presentation.WebAPI.Controllers
         {
             return Ok(await Mediator.Send(command with {Id = id, TeamMemberId = UserManager.GetUserGuid(User)}));
         }
+
+        [HttpPost, Route("{id:guid}/unassign")]
+        public async Task<IActionResult> UnassignCase([FromRoute] Guid id)
+        {
+            var command = new UnassignCaseCommand(id, UserManager.GetUserGuid(User));
+            return Ok(await Mediator.Send(command));
+        }
     }
 }

@@ -1,4 +1,6 @@
+using System;
 using System.Threading.Tasks;
+using Backend.Core.Application.Features.Administration.Commands;
 using Backend.Core.Application.Features.Administration.Queries;
 using Backend.Core.Domain.Entities;
 using Backend.Infrastructure.Extensions;
@@ -17,13 +19,27 @@ namespace Backend.Presentation.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] string view)
+        public async Task<IActionResult> GetByCondition([FromQuery] string view)
         {
             var request = new GetTeamMembersByConditionQuery(view, UserManager.GetUserGuid(User));
             var response = await Mediator.Send(request);
             if (response == null)
                 return BadRequest();
             return Ok(response);
+        }
+
+        [HttpDelete, Route("{id:guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id, [FromBody] DeleteTeamMemberCommand command)
+        {
+            command = command with {Id = id, CurrentTeamMemberId = UserManager.GetUserGuid(User)};
+            return Ok(await Mediator.Send(command));
+        }
+        
+        [HttpPost, Route("{id:guid}/restore")]
+        public async Task<IActionResult> Restore([FromRoute] Guid id)
+        {
+            var command = new RestoreTeamMemberCommand(id, UserManager.GetUserGuid(User));
+            return Ok(await Mediator.Send(command));
         }
     }
 }

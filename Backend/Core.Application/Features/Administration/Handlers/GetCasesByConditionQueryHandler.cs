@@ -27,11 +27,11 @@ namespace Backend.Core.Application.Features.Administration.Handlers
             return request.View switch
             {
                 "unassigned" => await cases
-                    .Where(@case => @case.Status == Status.New)
+                    .Where(@case => @case.TeamMemberId == null)
                     .ProjectTo<CaseDTO>(Mapper.ConfigurationProvider)
                     .ToArrayAsync(cancellationToken),
-                "opened" => await cases
-                    .Where(@case => @case.Status == Status.Open)
+                "open" => await cases
+                    .Where(@case => @case.Status == Status.Open && @case.TeamMemberId != null)
                     .ProjectTo<CaseDTO>(Mapper.ConfigurationProvider)
                     .ToArrayAsync(cancellationToken),
                 "closed" => await cases
