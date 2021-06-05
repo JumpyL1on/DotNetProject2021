@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {TeamMember} from '../../interfaces/team-member';
 import {Case} from '../../interfaces/case';
@@ -13,7 +13,7 @@ import {AssignCaseCommand} from '../../interfaces/assign-case-command';
   styleUrls: ['./open-cases.component.css']
 })
 export class OpenCasesComponent implements OnInit {
-  headers = ['Status', 'Assignee', 'Updated', 'Actions'];
+  headers = ['', 'Status', 'Assignee', 'Updated', 'Actions'];
   rows: Case[];
 
   constructor(private http: HttpClient, private service: NbDialogService) {

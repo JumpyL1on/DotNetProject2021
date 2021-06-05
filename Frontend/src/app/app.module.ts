@@ -77,6 +77,7 @@ import { OpenCasesComponent } from './cases/open-cases/open-cases.component';
       accessControl: {
         guest: {},
         manager: {
+          send: 'message',
           view: 'assigned-to-me'
         },
         director: {

@@ -6,5 +6,6 @@
                    [reply]="message.reply"
                    [date]="message.createdAt">
   </nb-chat-message>
-  <nb-chat-form (send)="sendMessage($event)"></nb-chat-form>
+  <nb-chat-form *ngIf="accessChecker.isGranted('send', 'message') | async"
+                (send)="sendMessage($event)"></nb-chat-form>
 </nb-chat>

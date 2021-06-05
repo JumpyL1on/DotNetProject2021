@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using Backend.Core.Application.Extensions;
+using Backend.Core.Application.Interfaces;
 using Backend.Core.Domain.ValueObjects;
 using Backend.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -105,7 +106,11 @@ namespace Backend.Presentation.WebAPI
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseEndpoints(endpoints => endpoints.MapControllers());
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapHub<WebhooksHub>("api/webhooks");
+            });
         }
     }
 }

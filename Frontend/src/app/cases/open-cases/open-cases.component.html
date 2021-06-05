@@ -5,6 +5,11 @@
     </th>
   </tr>
   <tr *ngFor="let case of rows">
+    <td>
+      <a [routerLink]="[case.id]">
+        <nb-user [name]="case.client.fullName"></nb-user>
+      </a>
+    </td>
     <td>{{case.status}}</td>
     <td>
       <nb-user size="medium" [name]="case.teamMember.fullName"></nb-user>
@@ -18,3 +23,4 @@
     </td>
   </tr>
 </table>
+<router-outlet></router-outlet>

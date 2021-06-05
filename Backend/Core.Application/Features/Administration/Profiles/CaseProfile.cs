@@ -1,6 +1,8 @@
 using AutoMapper;
 using Backend.Core.Application.Features.Administration.DTOs;
 using Backend.Core.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
+using Message = Telegram.Bots.Types.Message;
 
 namespace Backend.Core.Application.Features.Administration.Profiles
 {

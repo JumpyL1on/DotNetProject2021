@@ -8,6 +8,7 @@ import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
 import {map} from 'rxjs/operators';
 import * as signalR from '@microsoft/signalr';
 import {SendMessageToClientCommand} from '../../interfaces/send-message-to-client-command';
+import {NbAccessChecker} from '@nebular/security';
 
 @Component({
   selector: 'app-case-details',
@@ -19,7 +20,8 @@ export class CaseDetailsComponent implements OnInit {
   messages: Message[];
   teamMemberName: string;
 
-  constructor(private http: HttpClient, private route: ActivatedRoute, private authService: NbAuthService) {
+  constructor(private http: HttpClient, private route: ActivatedRoute, private authService: NbAuthService,
+              public accessChecker: NbAccessChecker) {
   }
 
   ngOnInit(): void {
@@ -37,6 +39,14 @@ export class CaseDetailsComponent implements OnInit {
               type: 'text',
               text: text,
               reply: false,
+              createdAt: new Date()
+            });
+          });
+          hubConnection.on("NotifyDirector", (text: string) => {
+            this.messages.push({
+              type: 'text',
+              text: text,
+              reply: true,
               createdAt: new Date()
             });
           });
