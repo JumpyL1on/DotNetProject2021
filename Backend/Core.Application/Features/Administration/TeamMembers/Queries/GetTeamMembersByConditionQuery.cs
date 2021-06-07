@@ -1,5 +1,5 @@
 using System;
-using Backend.Core.Application.Features.Administration.DTOs;
+using Backend.Core.Application.Features.Administration.TeamMembers.DTOs;
 using MediatR;
 
 namespace Backend.Core.Application.Features.Administration.Queries

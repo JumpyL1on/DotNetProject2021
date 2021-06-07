@@ -1,7 +1,8 @@
 using System;
+using Backend.Core.Application.Features.Administration.TeamMembers.DTOs;
 using Backend.Core.Application.Features.Correspondence.DTOs;
 
-namespace Backend.Core.Application.Features.Administration.DTOs
+namespace Backend.Core.Application.Features.Administration.Cases.DTOs
 {
     public record CaseDTO
     {

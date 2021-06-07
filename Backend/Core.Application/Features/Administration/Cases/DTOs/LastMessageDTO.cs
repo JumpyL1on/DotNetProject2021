@@ -1,4 +1,4 @@
-namespace Backend.Core.Application.Features.Administration.DTOs
+namespace Backend.Core.Application.Features.Administration.Cases.DTOs
 {
     public record LastMessageDTO
     {

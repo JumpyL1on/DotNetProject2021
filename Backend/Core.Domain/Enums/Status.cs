@@ -2,7 +2,7 @@ namespace Backend.Core.Domain.Enums
 {
     public enum Status
     {
-        New,
+        Unassigned,
         Open,
         Closed
     }

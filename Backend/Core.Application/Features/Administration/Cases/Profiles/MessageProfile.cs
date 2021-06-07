@@ -1,8 +1,8 @@
 using AutoMapper;
-using Backend.Core.Application.Features.Administration.DTOs;
+using Backend.Core.Application.Features.Administration.Cases.DTOs;
 using Telegram.Bots.Types;
 
-namespace Backend.Core.Application.Features.Administration.Profiles
+namespace Backend.Core.Application.Features.Administration.Cases.Profiles
 {
     public class MessageProfile : Profile
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Backend.Core.Application.Features.Administration.DTOs
+namespace Backend.Core.Application.Features.Administration.TeamMembers.DTOs
 {
     public record TeamMemberDTO
     {

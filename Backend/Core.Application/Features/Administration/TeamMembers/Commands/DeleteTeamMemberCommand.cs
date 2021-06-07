@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace Backend.Core.Application.Features.Administration.Commands
+namespace Backend.Core.Application.Features.Administration.TeamMembers.Commands
 {
     public record DeleteTeamMemberCommand : IRequest<Unit>
     {

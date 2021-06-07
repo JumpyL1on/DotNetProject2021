@@ -1,8 +1,8 @@
 using AutoMapper;
-using Backend.Core.Application.Features.Administration.DTOs;
+using Backend.Core.Application.Features.Administration.TeamMembers.DTOs;
 using Backend.Core.Domain.Entities;
 
-namespace Backend.Core.Application.Features.Administration.Profiles
+namespace Backend.Core.Application.Features.Administration.TeamMembers.Profiles
 {
     public class TeamMemberProfile : Profile
     {

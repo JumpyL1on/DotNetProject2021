@@ -3,12 +3,12 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Backend.Core.Application.Base;
-using Backend.Core.Application.Features.Administration.Commands;
+using Backend.Core.Application.Features.Administration.TeamMembers.Commands;
 using Backend.Core.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Core.Application.Features.Administration.Handlers
+namespace Backend.Core.Application.Features.Administration.TeamMembers.Handlers
 {
     public class DeleteTeamMemberCommandHandler : BaseCommandHandler, IRequestHandler<DeleteTeamMemberCommand, Unit>
     {

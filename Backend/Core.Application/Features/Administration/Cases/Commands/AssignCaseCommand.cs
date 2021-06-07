@@ -1,7 +1,7 @@
 using System;
 using MediatR;
 
-namespace Backend.Core.Application.Features.Administration.Commands
+namespace Backend.Core.Application.Features.Administration.Cases.Commands
 {
     public record AssignCaseCommand : IRequest<Unit>
     {

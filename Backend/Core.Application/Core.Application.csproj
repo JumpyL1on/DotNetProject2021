@@ -29,4 +29,8 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Features\Administration\TeamMembers" />
+    </ItemGroup>
+
 </Project>

@@ -1,0 +1,15 @@
+#cases {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#cases td, #cases th {
+  border: 1px solid;
+  padding: 8px;
+}
+
+#cases th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+}

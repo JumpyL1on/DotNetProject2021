@@ -13,7 +13,7 @@ import {AssignCaseCommand} from '../../interfaces/assign-case-command';
   styleUrls: ['./open-cases.component.css']
 })
 export class OpenCasesComponent implements OnInit {
-  headers = ['', 'Status', 'Assignee', 'Updated', 'Actions'];
+  headers = ['', 'Status', 'Assignee', 'Updated'];
   rows: Case[];
 
   constructor(private http: HttpClient, private service: NbDialogService) {

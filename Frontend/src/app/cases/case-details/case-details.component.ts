@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {Message} from '../../interfaces/message';
 import {AssignedCase} from '../../interfaces/assigned-case';
@@ -9,6 +9,7 @@ import {map} from 'rxjs/operators';
 import * as signalR from '@microsoft/signalr';
 import {SendMessageToClientCommand} from '../../interfaces/send-message-to-client-command';
 import {NbAccessChecker} from '@nebular/security';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-case-details',
@@ -21,7 +22,7 @@ export class CaseDetailsComponent implements OnInit {
   teamMemberName: string;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private authService: NbAuthService,
-              public accessChecker: NbAccessChecker) {
+              public accessChecker: NbAccessChecker, private router: Router, private location: Location) {
   }
 
   ngOnInit(): void {
@@ -85,5 +86,29 @@ export class CaseDetailsComponent implements OnInit {
           createdAt: command.createdAt
         });
       })
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  unassign(id: string) {
+    this.http
+      .post(environment.webAPI + `cases/${id}/unassign`, {})
+      .subscribe(() => {
+        this.router
+          .navigate(['../unassigned'], {relativeTo: this.route})
+          .then();
+      });
+  }
+
+  close(id: string) {
+    this.http
+      .post(environment.webAPI + `cases/${id}/close`, {})
+      .subscribe(() => {
+        this.router
+          .navigate(['../closed'], {relativeTo: this.route})
+          .then();
+      });
   }
 }

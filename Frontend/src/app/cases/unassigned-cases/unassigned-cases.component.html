@@ -1,4 +1,4 @@
-<table id="cases">
+<table *ngIf="rows.length > 0" id="cases">
   <tr>
     <th *ngFor="let column of headers">
       {{column}}

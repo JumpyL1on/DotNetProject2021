@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Backend.Core.Application.Base;
-using Backend.Core.Application.Features.Administration.DTOs;
+using Backend.Core.Application.Features.Administration.Cases.DTOs;
 using Backend.Core.Application.Features.Administration.Queries;
 using Backend.Core.Domain.Entities;
 using Backend.Core.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Core.Application.Features.Administration.Handlers
+namespace Backend.Core.Application.Features.Administration.Cases.Handlers
 {
     internal class GetCasesByConditionQueryHandler : BaseQueryHandler,
         IRequestHandler<GetCasesByConditionQuery, CaseDTO[]>
@@ -27,11 +27,11 @@ namespace Backend.Core.Application.Features.Administration.Handlers
             return request.View switch
             {
                 "unassigned" => await cases
-                    .Where(@case => @case.TeamMemberId == null)
+                    .Where(@case => @case.Status == Status.Unassigned)
                     .ProjectTo<CaseDTO>(Mapper.ConfigurationProvider)
                     .ToArrayAsync(cancellationToken),
                 "open" => await cases
-                    .Where(@case => @case.Status == Status.Open && @case.TeamMemberId != null)
+                    .Where(@case => @case.Status == Status.Open)
                     .ProjectTo<CaseDTO>(Mapper.ConfigurationProvider)
                     .ToArrayAsync(cancellationToken),
                 "closed" => await cases

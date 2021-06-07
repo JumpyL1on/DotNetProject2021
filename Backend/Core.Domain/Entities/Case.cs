@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Backend.Core.Domain.Base;
 using Backend.Core.Domain.Enums;
 
@@ -21,7 +20,7 @@ namespace Backend.Core.Domain.Entities
         public Case(int clientId)
         {
             ClientId = clientId;
-            Status = Status.New;
+            Status = Status.Unassigned;
             LastMessageId = null;
             UpdatedAt = DateTime.Now;
         }
@@ -46,6 +45,7 @@ namespace Backend.Core.Domain.Entities
         public void UnAssign()
         {
             TeamMemberId = null;
+            Status = Status.Unassigned;
             UpdatedAt = DateTime.Now;
         }
 

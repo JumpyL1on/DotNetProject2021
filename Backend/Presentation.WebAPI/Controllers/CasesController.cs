@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-using Backend.Core.Application.Features.Administration.Commands;
+using Backend.Core.Application.Features.Administration.Cases.Commands;
 using Backend.Core.Application.Features.Correspondence.Commands;
 using Backend.Core.Application.Features.Correspondence.Queries;
 using Backend.Core.Domain.Entities;
@@ -20,7 +20,7 @@ namespace Backend.Presentation.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] string view)
+        public async Task<IActionResult> GetByCondition([FromQuery] string view)
         {
             return view == "assigned-to-me"
                 ? Ok(await Mediator.Send(new GetAssignedCasesQuery(UserManager.GetUserGuid(User))))
@@ -28,13 +28,13 @@ namespace Backend.Presentation.WebAPI.Controllers
         }
 
         [HttpGet, Route("{id:guid}")]
-        public async Task<IActionResult> Get([FromRoute] Guid id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             return Ok(await Mediator.Send(new GetAssignedCaseByIdQuery(id)));
         }
 
         [HttpGet, Route("{id:guid}/messages")]
-        public async Task<IActionResult> GetMessages([FromRoute] Guid id)
+        public async Task<IActionResult> Get([FromRoute] Guid id)
         {
             return Ok(await Mediator.Send(new GetCaseMessagesQuery(id, UserManager.GetUserGuid(User))));
         }
@@ -55,6 +55,13 @@ namespace Backend.Presentation.WebAPI.Controllers
         public async Task<IActionResult> UnassignCase([FromRoute] Guid id)
         {
             var command = new UnassignCaseCommand(id, UserManager.GetUserGuid(User));
+            return Ok(await Mediator.Send(command));
+        }
+        
+        [HttpPost, Route("{id:guid}/close")]
+        public async Task<IActionResult> CloseCase([FromRoute] Guid id)
+        {
+            var command = new CloseCaseCommand(id, UserManager.GetUserGuid(User));
             return Ok(await Mediator.Send(command));
         }
     }

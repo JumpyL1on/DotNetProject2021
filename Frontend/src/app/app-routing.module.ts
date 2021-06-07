@@ -35,10 +35,9 @@ const routes: Routes = [
           {path: 'assigned-to-me', component: AssignedToMeCasesComponent, children: [
               {path: ':id', component: CaseDetailsComponent}
             ]},
-          {path: 'open', component: OpenCasesComponent, children: [
-              {path: ':id', component: CaseDetailsComponent}
-            ]},
-          {path: 'closed', component: ClosedCasesComponent}
+          {path: 'open', component: OpenCasesComponent},
+          {path: 'closed', component: ClosedCasesComponent},
+          {path: ':id', component: CaseDetailsComponent}
         ]},
       {path: 'team-members', component: TeamMembersSidebarComponent, children: [
           {path: 'enabled', component: EnabledTeamMembersComponent},

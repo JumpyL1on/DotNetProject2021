@@ -1,14 +1,14 @@
 using System;
 using MediatR;
 
-namespace Backend.Core.Application.Features.Administration.Commands
+namespace Backend.Core.Application.Features.Administration.Cases.Commands
 {
-    public record RestoreTeamMemberCommand : IRequest<Unit>
+    public record UnassignCaseCommand : IRequest<Unit>
     {
         public Guid Id { get; init; }
         public Guid CurrentTeamMemberId { get; init; }
 
-        public RestoreTeamMemberCommand(Guid id, Guid currentTeamMemberId)
+        public UnassignCaseCommand(Guid id, Guid currentTeamMemberId)
         {
             Id = id;
             CurrentTeamMemberId = currentTeamMemberId;

@@ -1,4 +1,6 @@
-<nb-chat [title]="assignedCase.client.fullName" style="height: 100vh">
+<nb-chat *ngIf="accessChecker.isGranted('send', 'message') | async; else director"
+         [title]="assignedCase.client.fullName"
+         style="height: 100vh">
   <nb-chat-message dateFormat="medium"
                    *ngFor="let message of messages"
                    [type]="message.type"
@@ -6,6 +8,19 @@
                    [reply]="message.reply"
                    [date]="message.createdAt">
   </nb-chat-message>
-  <nb-chat-form *ngIf="accessChecker.isGranted('send', 'message') | async"
-                (send)="sendMessage($event)"></nb-chat-form>
+  <nb-chat-form (send)="sendMessage($event)"></nb-chat-form>
 </nb-chat>
+<ng-template #director>
+  <nb-chat [title]="assignedCase.client.fullName" size="giant">
+    <nb-chat-message dateFormat="medium"
+                     *ngFor="let message of messages"
+                     [type]="message.type"
+                     [message]="message.text"
+                     [reply]="message.reply"
+                     [date]="message.createdAt">
+    </nb-chat-message>
+  </nb-chat>
+  <button nbButton size="giant" (click)="goBack()">Back</button>
+  <button nbButton size="giant" (click)="unassign(assignedCase.id)">Unassign</button>
+  <button nbButton size="giant" (click)="close(assignedCase.id)">Close</button>
+</ng-template>

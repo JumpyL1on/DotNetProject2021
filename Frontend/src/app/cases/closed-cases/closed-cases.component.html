@@ -1,1 +1,21 @@
-<p>closed works!</p>
+<table *ngIf="rows.length > 0" id="cases">
+  <tr>
+    <th *ngFor="let column of headers">
+      {{column}}
+    </th>
+  </tr>
+  <tr *ngFor="let case of rows">
+    <td>
+      <a [routerLink]="['../' + case.id]">
+        <nb-user [name]="case.client.fullName"></nb-user>
+      </a>
+    </td>
+    <td>
+      <nb-tag appearance="filled" [text]="case.status"></nb-tag>
+    </td>
+    <td>
+      <nb-user [name]="case.teamMember.fullName"></nb-user>
+    </td>
+    <td>{{case.updatedAt | date: 'medium'}}</td>
+  </tr>
+</table>

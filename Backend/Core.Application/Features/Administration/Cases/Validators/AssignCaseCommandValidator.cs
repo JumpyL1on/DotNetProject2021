@@ -1,10 +1,10 @@
-using Backend.Core.Application.Features.Administration.Commands;
+using Backend.Core.Application.Features.Administration.Cases.Commands;
 using Backend.Core.Domain.Entities;
 using Backend.Core.Domain.Enums;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Core.Application.Features.Administration.Validators
+namespace Backend.Core.Application.Features.Administration.Cases.Validators
 {
     public class AssignCaseCommandValidator : AbstractValidator<AssignCaseCommand>
     {
@@ -16,8 +16,6 @@ namespace Backend.Core.Application.Features.Administration.Validators
                     var @case = await dbContext
                         .Set<Case>()
                         .FindAsync(new object[] {guid}, token);
-                    @case.UnAssign();
-                    await dbContext.SaveChangesAsync(token);
                     return @case != null && @case.TeamMemberId == null;
                 })
                 .DependentRules(() =>

@@ -4,14 +4,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Backend.Core.Application.Base;
-using Backend.Core.Application.Features.Administration.DTOs;
 using Backend.Core.Application.Features.Administration.Queries;
+using Backend.Core.Application.Features.Administration.TeamMembers.DTOs;
 using Backend.Core.Domain.Entities;
 using Backend.Core.Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Backend.Core.Application.Features.Administration.Handlers
+namespace Backend.Core.Application.Features.Administration.TeamMembers.Handlers
 {
     public class GetTeamMembersByConditionQueryHandler : BaseQueryHandler, IRequestHandler<GetTeamMembersByConditionQuery, TeamMemberDTO[]>
     {
