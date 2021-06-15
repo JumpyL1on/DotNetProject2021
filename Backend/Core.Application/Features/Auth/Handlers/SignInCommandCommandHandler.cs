@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Core.Application.Features.Auth.Handlers
 {
-    internal class SignInCommandHandler : BaseAuthHandler, IRequestHandler<SignInCommand, string>
+    internal class SignInCommandCommandHandler : BaseAuthCommandHandler, IRequestHandler<SignInCommand, string>
     {
-        public SignInCommandHandler(UserManager<TeamMember> userManager, IJWTGenerator jwtGenerator) : base(userManager,
+        public SignInCommandCommandHandler(UserManager<TeamMember> userManager, IJWTGenerator jwtGenerator) : base(userManager,
             jwtGenerator)
         {
         }

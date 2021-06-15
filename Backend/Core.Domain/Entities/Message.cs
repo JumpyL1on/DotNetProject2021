@@ -12,14 +12,16 @@ namespace Backend.Core.Domain.Entities
         [Required] public Type Type { get; protected set; }
         [Required] public string Text { get; protected set; }
         [Required] public bool Reply { get; protected set; }
+        [Required] public string Sender { get; protected set; }
         [Required] public DateTime CreatedAt { get; protected set; }
 
-        public Message(Guid caseId, string text, bool reply, DateTime createdAt)
+        public Message(Guid caseId, string text, bool reply, string sender, DateTime createdAt)
         {
             CaseId = caseId;
             Type = Type.Text;
             Text = text;
             Reply = reply;
+            Sender = sender;
             CreatedAt = createdAt;
         }
 

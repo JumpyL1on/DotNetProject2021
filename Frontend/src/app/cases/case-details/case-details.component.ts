@@ -1,11 +1,10 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
 import {Message} from '../../interfaces/message';
 import {AssignedCase} from '../../interfaces/assigned-case';
 import {NbAuthJWTToken, NbAuthService} from '@nebular/auth';
-import {map} from 'rxjs/operators';
 import * as signalR from '@microsoft/signalr';
 import {SendMessageToClientCommand} from '../../interfaces/send-message-to-client-command';
 import {NbAccessChecker} from '@nebular/security';
@@ -40,6 +39,7 @@ export class CaseDetailsComponent implements OnInit {
               type: 'text',
               text: text,
               reply: false,
+              sender: this.assignedCase.client.fullName,
               createdAt: new Date()
             });
           });
@@ -48,6 +48,7 @@ export class CaseDetailsComponent implements OnInit {
               type: 'text',
               text: text,
               reply: true,
+              sender: this.teamMemberName,
               createdAt: new Date()
             });
           });
@@ -74,6 +75,7 @@ export class CaseDetailsComponent implements OnInit {
       caseId: this.assignedCase.id,
       clientId: this.assignedCase.client.id,
       text: event.message,
+      sender: this.teamMemberName,
       createdAt: new Date()
     };
     this.http
@@ -83,6 +85,7 @@ export class CaseDetailsComponent implements OnInit {
           type: 'text',
           text: event.message,
           reply: true,
+          sender: this.teamMemberName,
           createdAt: command.createdAt
         });
       })

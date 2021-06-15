@@ -6,6 +6,7 @@
                    [type]="message.type"
                    [message]="message.text"
                    [reply]="message.reply"
+                   [sender]="message.sender"
                    [date]="message.createdAt">
   </nb-chat-message>
   <nb-chat-form (send)="sendMessage($event)"></nb-chat-form>
@@ -17,6 +18,7 @@
                      [type]="message.type"
                      [message]="message.text"
                      [reply]="message.reply"
+                     [sender]="message.sender"
                      [date]="message.createdAt">
     </nb-chat-message>
   </nb-chat>

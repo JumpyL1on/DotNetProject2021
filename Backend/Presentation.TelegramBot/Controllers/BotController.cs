@@ -38,7 +38,8 @@ namespace Presentation.TelegramBot.Controllers
                 var user = message.From;
                 if (user is not null)
                 {
-                    var command = new SendMessageToManagerCommand(user.Id, message.Text, DateTime.Now);
+                    var sender = $"{user.FirstName} {user.LastName}";
+                    var command = new SendMessageToManagerCommand(user.Id, message.Text, sender, DateTime.Now);
                     await Mediator.Send(command);
                 }
             }

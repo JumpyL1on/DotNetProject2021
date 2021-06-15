@@ -30,14 +30,13 @@ namespace Backend.Core.Application.Features.Correspondence.Handlers
             var teamMember = await DbContext
                 .Set<TeamMember>()
                 .SingleAsync(member => member.Role == Role.Director, cancellationToken);
-            await HubContext
-                .Clients
+            await HubContext.Clients
                 .User(teamMember.Id.ToString())
                 .SendAsync("NotifyDirector", request.Text, cancellationToken);
             var response = await BotClient.HandleAsync(new SendText(request.ClientId, request.Text), cancellationToken);
             if (!response.Ok)
                 return null;
-            var message = new Message(request.CaseId, request.Text, true, request.CreatedAt);
+            var message = new Message(request.CaseId, request.Text, true, request.Sender, request.CreatedAt);
             DbContext.Entry(message).State = EntityState.Added;
             await DbContext.SaveChangesAsync(cancellationToken);
             return Unit.Value;

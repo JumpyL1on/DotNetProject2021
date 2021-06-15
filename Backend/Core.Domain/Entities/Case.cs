@@ -36,12 +36,6 @@ namespace Backend.Core.Domain.Entities
             UpdatedAt = DateTime.Now;
         }
 
-        public void Foo(Guid lastMessageId)
-        {
-            LastMessageId = lastMessageId;
-            UpdatedAt = DateTime.Now;
-        }
-
         public void UnAssign()
         {
             TeamMemberId = null;

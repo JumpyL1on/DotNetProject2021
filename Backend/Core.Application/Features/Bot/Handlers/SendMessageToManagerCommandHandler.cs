@@ -35,7 +35,7 @@ namespace Backend.Core.Application.Features.Bot.Handlers
             await HubContext.Clients
                 .User(teamMember.Id.ToString())
                 .SendAsync("SendText", request.Text, cancellationToken);
-            var message = new Message(@case.Id, request.Text, false, request.CreatedAt);
+            var message = new Message(@case.Id, request.Text, false, request.Sender, request.CreatedAt);
             DbContext.Entry(message).State = EntityState.Added;
             await DbContext.SaveChangesAsync(cancellationToken);
             return Unit.Value;

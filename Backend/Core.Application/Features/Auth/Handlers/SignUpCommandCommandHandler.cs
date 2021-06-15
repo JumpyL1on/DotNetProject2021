@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Backend.Core.Application.Features.Auth.Handlers
 {
-    internal class SignUpCommandHandler : BaseAuthHandler, IRequestHandler<SignUpCommand, string>
+    internal class SignUpCommandCommandHandler : BaseAuthCommandHandler, IRequestHandler<SignUpCommand, string>
     {
-        public SignUpCommandHandler(UserManager<TeamMember> userManager, IJWTGenerator jwtGenerator) : base(userManager,
+        public SignUpCommandCommandHandler(UserManager<TeamMember> userManager, IJWTGenerator jwtGenerator) : base(userManager,
             jwtGenerator)
         {
         }
