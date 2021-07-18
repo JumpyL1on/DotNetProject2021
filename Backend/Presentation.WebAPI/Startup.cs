@@ -107,7 +107,7 @@ namespace Backend.Presentation.WebAPI
                 const string origin = "http://localhost:4200";
                 builder.WithOrigins(origin).AllowAnyMethod().AllowAnyHeader().AllowCredentials();
             });
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
