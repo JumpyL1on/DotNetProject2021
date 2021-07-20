@@ -97,7 +97,11 @@ namespace Backend.Presentation.WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Presentation.WebAPI v1"));
             }
-
+	    
+	    app.UseForwardedHeaders(new ForwardedHeadersOptions()
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
             app.UseCors(builder =>
             {
                 const string origin = "http://localhost:4200";
@@ -105,10 +109,6 @@ namespace Backend.Presentation.WebAPI
             });
             //app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseForwardedHeaders(new ForwardedHeadersOptions()
-            {
-                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-            });
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
