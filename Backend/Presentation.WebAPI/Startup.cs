@@ -98,7 +98,7 @@ namespace Backend.Presentation.WebAPI
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Presentation.WebAPI v1"));
             }
 	    
-	    app.UseForwardedHeaders(new ForwardedHeadersOptions()
+	        app.UseForwardedHeaders(new ForwardedHeadersOptions()
             {
                 ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
             });
